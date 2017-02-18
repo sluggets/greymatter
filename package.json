@@ -1,0 +1,27 @@
+{
+  "name": "greymatter",
+  "version": "1.0.0",
+  "description": "Simple bus stop and student management web application.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sluggets/greymatter.git"
+  },
+  "keywords": [
+    "school",
+    "bus",
+    "routing",
+    "bus",
+    "stop",
+    "transportation"
+  ],
+  "author": "Tim Longoria",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sluggets/greymatter/issues"
+  },
+  "homepage": "https://github.com/sluggets/greymatter#readme"
+}
