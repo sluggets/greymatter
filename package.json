@@ -26,6 +26,7 @@
   "homepage": "https://github.com/sluggets/greymatter#readme",
   "dependencies": {
     "express": "^4.14.1",
+    "mongodb": "^2.2.24",
     "nunjucks": "^3.0.0"
   }
 }

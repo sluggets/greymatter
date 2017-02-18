@@ -1,11 +1,16 @@
-var express = require('express');
-var nunjucks = require('nunjucks');
-var app = express();
+var express = require('express'),
+ nunjucks = require('nunjucks'),
+ MongoClient = require('mongodb').MongoClient,
+ app = express();
 
-app.set('view engine', 'nunjucks');
+nunjucks.configure('views', {
+  autoescape: true,
+  express: app
+});
+//app.set('view engine', 'nunjucks');
 
 app.get('/', function(req, res) {
-  res.send("Hello Greymatter!");
+  res.render("test.html", { username: "Timothy!"});
 });
 
 app.listen(3000, function() {
