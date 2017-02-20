@@ -1,0 +1,7 @@
+Look into routes directory instead of routing in app.js
+
+Add static folders, public->css->javascript->images
+
+Enable sessions, body-parser?, express-session?
+
+What is module.exports?
