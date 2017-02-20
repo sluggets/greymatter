@@ -1,6 +1,8 @@
 var express = require('express'),
  nunjucks = require('nunjucks'),
  MongoClient = require('mongodb').MongoClient,
+ passport = require('passport'),
+ LocalStrategy = require('passport-local').Strategy,
  app = express();
 
 nunjucks.configure('views', {
