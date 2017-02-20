@@ -25,10 +25,14 @@
   },
   "homepage": "https://github.com/sluggets/greymatter#readme",
   "dependencies": {
+    "body-parser": "^1.16.1",
+    "cookie-parser": "^1.4.3",
     "express": "^4.14.1",
     "express-session": "^1.15.1",
     "mongodb": "^2.2.24",
     "nunjucks": "^3.0.0",
-    "passport": "^0.3.2"
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "passport-session": "^1.0.2"
   }
 }
