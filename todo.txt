@@ -5,3 +5,9 @@ Add static folders, public->css->javascript->images
 Enable sessions, body-parser?, express-session?
 
 What is module.exports?
+Answer?: I think it allows you to export your current app instance so that
+it can be reused in another app in your program
+
+Set up mongodb call to set user/password/hash/email to new collection in simpleroute using the /add-user route
+
+
