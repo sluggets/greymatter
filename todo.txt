@@ -10,4 +10,4 @@ it can be reused in another app in your program
 
 Set up mongodb call to set user/password/hash/email to new collection in simpleroute using the /add-user route
 
-
+in order to install bcrypt, it is necessary to install build-essential in ubuntu. So "sudo apt-get install build-essential"
