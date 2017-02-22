@@ -7,6 +7,7 @@ var express = require('express'),
  bodyParser = require('body-parser'),
  session = require('express-session'),
  passportSession = require('passport-session'),
+ bcrypt = require('bcrypt'),
  app = express();
 
 nunjucks.configure('views', {
@@ -25,6 +26,23 @@ app.use(session({ secret: 'sluggets lucent',
 app.use(passport.initialize());
 app.use(passport.session());
 
+function hashPassword(passToCrypt) {
+  bcrypt.genSalt(11, function(err, salt) {
+    if (err)
+    {
+      return console.log(err);
+    }
+
+    bcrypt.hash(passToCrypt, salt, function(err, hash) {
+      if (err)
+      {
+        return console.log(err);
+      }
+    
+      console.log(hash);
+    });
+  });
+}
 passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
@@ -61,13 +79,16 @@ app.get('/', function(req, res) {
   res.render("test.html", { username: "Timothy!"});
 });
 
+
 app.get('/add-user', function(req, res) {
   res.render("addUser.html");
 });
 
 app.post('/add-user', function(req, res) {
-  res.render("test.html", { appUser: req.body.username, appPass: req.body.password });
+  res.render("test.html", { appUser: req.body.username, appPass: req.body.password, appEmail: req.body.email });
   console.log(req.body);
+
+  hashPassword(req.body.password); 
 });
 app.post('/login',
   passport.authenticate('local', {successRedirect: '/',
