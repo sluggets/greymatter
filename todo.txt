@@ -11,3 +11,9 @@ it can be reused in another app in your program
 Set up mongodb call to set user/password/hash/email to new collection in simpleroute using the /add-user route
 
 in order to install bcrypt, it is necessary to install build-essential in ubuntu. So "sudo apt-get install build-essential"
+
+the hash from bcrypt stores everything you need, including header info, salt, 
+AND hashed data. Put dat directly into DB!!
+
+Last worked on implementing counter into password field to show how many chars
+are left until the count of 50

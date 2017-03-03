@@ -1,11 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Grey Matter</title>
+    <script src="../public/js/greymatter.js"></script>
+  </head>
+  <body>
 <form action="/add-user" method="post">
   <div>
     <label>Username:</label>
     <input type="text" name="username"/>
   </div>
   <div>
-    <label>Password:</label>
-    <input type="password" name="password"/>
+    <label>Password: (min. 15 characters, max. 50 characters)</label>
+    <input type="password" name="password"
+           maxlength=50 minlength=15 />
+    <div id=
   </div>
   <div>
     <label>Email:</label>
@@ -15,3 +25,5 @@
     <input type="submit" value="Log In"/>
   </div>
 </form>
+  </body>
+</html>

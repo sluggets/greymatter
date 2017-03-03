@@ -8,6 +8,9 @@ var express = require('express'),
  session = require('express-session'),
  passportSession = require('passport-session'),
  bcrypt = require('bcrypt'),
+ assert = require('assert'),
+ validate = require('express-validation'),
+ validation = require('./validation/add-user.js'),
  app = express();
 
 nunjucks.configure('views', {
@@ -27,7 +30,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 function hashPassword(passToCrypt) {
-  bcrypt.genSalt(11, function(err, salt) {
+  bcrypt.genSalt(12, function(err, salt) {
     if (err)
     {
       return console.log(err);
@@ -38,8 +41,9 @@ function hashPassword(passToCrypt) {
       {
         return console.log(err);
       }
-    
-      console.log(hash);
+      
+      console.log("hash inside func: " + hash);
+      return hash;
     });
   });
 }
@@ -84,11 +88,14 @@ app.get('/add-user', function(req, res) {
   res.render("addUser.html");
 });
 
-app.post('/add-user', function(req, res) {
+app.post('/add-user', validate(validation), function(req, res) {
   res.render("test.html", { appUser: req.body.username, appPass: req.body.password, appEmail: req.body.email });
   console.log(req.body);
 
-  hashPassword(req.body.password); 
+  console.log("outside of func: " + hashPassword(req.body.password)); 
+
+  //console.log("newHash: " + typeof(newHash));
+  //MongoClient.connect('simpleroute')
 });
 app.post('/login',
   passport.authenticate('local', {successRedirect: '/',
@@ -100,6 +107,10 @@ app.listen(3000, function() {
 });
 
 app.use(function(err, req, res, next) {
+  if (err instanceof validate.ValidationError)
+  {
+    return res.status(err.status).json(err);
+  }
   console.error(err.stack);
   res.status(500).send("Something broke!");
 });
