@@ -11,6 +11,7 @@ var express = require('express'),
  assert = require('assert'),
  validate = require('express-validation'),
  validation = require('./validation/add-user.js'),
+ path = require('path'),
  app = express();
 
 nunjucks.configure('views', {
@@ -18,7 +19,8 @@ nunjucks.configure('views', {
   express: app
 });
 
-app.use(express.static('public'));
+
+app.use(express.static(path.join(__dirname, '/public')));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

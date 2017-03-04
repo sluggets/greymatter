@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Grey Matter</title>
-    <script src="../public/js/greymatter.js"></script>
+    <script src="/js/greymatter.js"></script>
   </head>
   <body>
 <form action="/add-user" method="post">
@@ -12,10 +12,15 @@
     <input type="text" name="username"/>
   </div>
   <div>
-    <label>Password: (min. 15 characters, max. 50 characters)</label>
+    <label>Password:</label>
     <input type="password" name="password"
+           onKeyDown="textCounter(this, 0);"
+           onKeyUp="textCounter(this, 'pass-max', 50)"
            maxlength=50 minlength=15 />
-    <div id=
+    <label>(min. 15 characters, max. 50 characters) <input readonly type="text"
+           id="pass-max" name="pass-max"
+           size="2" maxlength="3" value="0"/> so far...
+    </label>
   </div>
   <div>
     <label>Email:</label>
