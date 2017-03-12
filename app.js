@@ -9,9 +9,13 @@ var express = require('express'),
  passportSession = require('passport-session'),
  bcrypt = require('bcrypt'),
  assert = require('assert'),
+ flash = require('connect-flash'),
  validate = require('express-validation'),
  validation = require('./validation/add-user.js'),
  path = require('path'),
+ addUser = require('./routes/addUser'),
+ login = require('./routes/login'), 
+ home = require('./routes/home'),
  app = express();
 
 nunjucks.configure('views', {
@@ -30,8 +34,12 @@ app.use(session({ secret: 'sluggets lucent',
  }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
+app.use('/add-user', addUser);
+app.use('/login', login);
+app.use('/home', home);
 
-function hashPassword(passToCrypt) {
+/*function hashPassword(passToCrypt) {
   bcrypt.genSalt(12, function(err, salt) {
     if (err)
     {
@@ -48,8 +56,8 @@ function hashPassword(passToCrypt) {
       return hash;
     });
   });
-}
-passport.serializeUser(function(user, done) {
+}*/
+/*passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
 
@@ -80,17 +88,17 @@ passport.use(new LocalStrategy(
       return done(null, user);
     });
   }
-));
+));*/
 app.get('/', function(req, res) {
   res.render("test.html", { username: "Timothy!"});
 });
 
 
-app.get('/add-user', function(req, res) {
+/*app.get('/add-user', function(req, res) {
   res.render("addUser.html");
-});
+});*/
 
-app.post('/add-user', validate(validation), function(req, res) {
+/*app.post('/add-user', validate(validation), function(req, res) {
   res.render("test.html", { appUser: req.body.username, appPass: req.body.password, appEmail: req.body.email });
   console.log(req.body);
 
@@ -98,12 +106,13 @@ app.post('/add-user', validate(validation), function(req, res) {
 
   //console.log("newHash: " + typeof(newHash));
   //MongoClient.connect('simpleroute')
-});
-app.post('/login',
+});*/
+app.use('/add-user', addUser);
+/*app.post('/login',
   passport.authenticate('local', {successRedirect: '/',
                                   failureRedirect: '/',
                                   failureFlash: true })
-);
+);*/
 app.listen(3000, function() {
   console.log('Example greymatter listening on port 3000!');
 });

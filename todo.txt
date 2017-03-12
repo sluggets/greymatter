@@ -15,5 +15,8 @@ in order to install bcrypt, it is necessary to install build-essential in ubuntu
 the hash from bcrypt stores everything you need, including header info, salt, 
 AND hashed data. Put dat directly into DB!!
 
-Last worked on implementing counter into password field to show how many chars
+--DONE--Last worked on implementing counter into password field to show how many chars
 are left until the count of 50
+
+I set up routes directory, but need to make the hash function available to the
+addUsers POST route. Maybe put this in /lib and export it?
