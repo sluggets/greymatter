@@ -9,29 +9,39 @@ var express = require('express'),
  session = require('express-session'),
  passportSession = require('passport-session'),
  flash = require('connect-flash');
- assert = require('assert');
+ assert = require('assert'),
+ app = express();
 
 
 var router = express.Router();
 
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
 router.get('/', function(req, res) {
+  if (req.flash)
+  {
+    console.log("has it");
+    console.log(req.failureflash);
+  }
   res.render("login.html");
 });
 
 router.post('/',   
     passport.authenticate('local', {successRedirect: '/home',
                                   failureRedirect: '/login',
-                                  failureFlash: true,
+                                  failureFlash: "Failed Dude!",
                                   successFlash: 'Welcome man!'})
 );
 passport.serializeUser(function(user, done) {
-  done(null, user.id);
+  done(null, user);
 });
 
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
-    done(err, user);
-  });
+passport.deserializeUser(function(user, done) {
+  // i might need to call to mongodb to
+  // do this part?
+  done(null, user);
 });
 
 passport.use(new LocalStrategy(
@@ -41,11 +51,14 @@ passport.use(new LocalStrategy(
       {
         return done(err);
       }
+      console.log("Successfully connected to simpleroute");
 
       db.collection('users').find({ 'username': username }).toArray(function(err, docs) {
+        console.log(docs);
+        console.log("password " + password);
         if (docs.length == 0)
         {
-          return done(null, false, { messge: 'Incorrect username.' });
+          return done(null, false, { message: 'Incorrect username.' });
         }
 
         bcrypt.compare(password, docs[0]["password"], function (err, res) {
@@ -55,6 +68,7 @@ passport.use(new LocalStrategy(
           } 
           else
           {
+            console.log("Successfully entered pass!....douche");
             return done(null, docs[0]["username"]);
           }
         });

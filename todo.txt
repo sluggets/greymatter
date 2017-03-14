@@ -20,3 +20,5 @@ are left until the count of 50
 
 I set up routes directory, but need to make the hash function available to the
 addUsers POST route. Maybe put this in /lib and export it?
+
+figure out flash messages

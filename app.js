@@ -16,6 +16,7 @@ var express = require('express'),
  addUser = require('./routes/addUser'),
  login = require('./routes/login'), 
  home = require('./routes/home'),
+ sesh = require('./routes/sesh'),
  app = express();
 
 nunjucks.configure('views', {
@@ -30,7 +31,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({ secret: 'sluggets lucent',
                   resave: false,
-                  saveUninitialized: false
+                  saveUninitialized: false,
+                  name: 'greymatter'
  }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -38,6 +40,7 @@ app.use(flash());
 app.use('/add-user', addUser);
 app.use('/login', login);
 app.use('/home', home);
+app.use('/sesh', sesh);
 
 /*function hashPassword(passToCrypt) {
   bcrypt.genSalt(12, function(err, salt) {
